@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>For Isabel — Happy Friendship Day</title>
+<meta name="description" content="A gift, for someone who means more than words can explain." />
+
+<!-- Fonts: Fraunces (literary serif, for the letter) + Inter (utility sans, for interface chrome) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Ambient audio, preloaded, plays after first interaction -->
+<audio id="bgm" src="assets/love-me-not.mp3" preload="auto" loop></audio>
+
+<!-- Persistent atmosphere layers: stars, particles, fireflies, vignette -->
+<div class="atmosphere" aria-hidden="true">
+  <canvas id="stars"></canvas>
+  <canvas id="particles"></canvas>
+  <div id="fireflies"></div>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+</div>
+
+<!-- Sound toggle, always available once music starts -->
+<button id="soundToggle" class="sound-toggle" aria-label="Toggle sound" hidden>
+  <svg viewBox="0 0 24 24" class="icon-on"><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z" fill="currentColor"/></svg>
+  <svg viewBox="0 0 24 24" class="icon-off" hidden><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="1.6"/><line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="1.6"/></svg>
+</button>
+
+<main id="stage-root">
+
+  <!-- STAGE 1 — Intro / the box, waiting to be opened -->
+  <section class="stage active" id="stage-1" data-stage="1">
+    <div class="stage-1-copy">
+      <p class="eyebrow reveal" data-delay="200">Friendship Day</p>
+      <h1 class="headline reveal" data-delay="600">Happy Friendship Day</h1>
+      <p class="subline reveal" data-delay="1400">I made something for you.</p>
+    </div>
+
+    <div class="gift-scene reveal" data-delay="1000">
+      <div class="gift-box" id="giftBox">
+        <div class="box-glow"></div>
+        <div class="box-lid"></div>
+        <div class="box-body">
+          <div class="box-ribbon-v"></div>
+        </div>
+        <div class="box-ribbon-h"></div>
+      </div>
+    </div>
+
+    <button class="cta reveal" id="openBtn" data-delay="2400">
+      <span>Open</span>
+    </button>
+  </section>
+
+  <!-- STAGE 2 — Lid lifts, light escapes, envelope rises -->
+  <section class="stage" id="stage-2" data-stage="2">
+    <div class="gift-scene stage-2-scene">
+      <div class="gift-box open" id="giftBoxOpen">
+        <div class="box-glow strong"></div>
+        <div class="box-lid lifted"></div>
+        <div class="box-body">
+          <div class="light-beam"></div>
+        </div>
+      </div>
+      <div class="envelope" id="envelope">
+        <div class="envelope-back"></div>
+        <div class="envelope-flap"></div>
+        <div class="envelope-front"></div>
+        <div class="envelope-seal"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 3 — Envelope opens, letter unfolds -->
+  <section class="stage" id="stage-3" data-stage="3">
+    <div class="letter-scene">
+      <div class="paper" id="paper">
+        <div class="paper-fold fold-1"></div>
+        <div class="paper-fold fold-2"></div>
+        <p class="paper-intro">I made this for someone who means more than words can explain.</p>
+        <p class="paper-recipient">For Isabel</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 4 — The letter, message by message, auto-advancing -->
+  <section class="stage" id="stage-4" data-stage="4">
+    <div class="letter-frame">
+      <div class="progress-thread" id="progressThread" aria-hidden="true"></div>
+      <p class="message-text" id="messageText"></p>
+    </div>
+  </section>
+
+  <!-- FINAL STAGE — Night sky, closing message, hearts -->
+  <section class="stage" id="stage-final" data-stage="final">
+    <div class="closing-wrap">
+      <p class="closing-text" id="closingText"></p>
+    </div>
+    <button class="heart-btn" id="heartBtn" hidden aria-label="Send love">❤</button>
+  </section>
+
+</main>
+
+<!-- Heart / confetti burst layer -->
+<div id="heartBurst" class="heart-burst" aria-hidden="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
